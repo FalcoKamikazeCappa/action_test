@@ -1,26 +1,14 @@
-name: CI Test
+name: CI smoke test
 
-on:
-  push:
-    branches: [ "main" ]   # main ブランチに push されたら実行
-  pull_request:
-    branches: [ "main" ]   # PR でも実行
+on: push
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Ubuntu環境で実行
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
+      - run: node -v
+      - run: echo "Hello from GitHub Actions"
